@@ -1,17 +1,19 @@
 # Payrun
 
-Pay people by name, not by address. Payrun is a Nimiq Pay mini app for team leads who send recurring NIM payroll to handles (`@raph`) instead of raw addresses.
+Pay people by name. Payrun is a Nimiq Pay mini app for team leads who send recurring NIM payroll. Each person on the roster has a name and a Nimiq wallet — Nimiq has no username protocol, so the send always goes to the address on file.
 
-It runs inside the Nimiq Pay mobile WebView. Wallet keys never leave the wallet. Every send and handle-claim is one explicit confirmation in Nimiq Pay.
+It runs inside the Nimiq Pay mobile WebView. Wallet keys never leave the wallet. Every send is one explicit confirmation in Nimiq Pay.
+
+**Live:** https://payrun.up.railway.app
 
 ## What it does
 
-- Roster of handles, NIM amounts, and cadence (weekly / biweekly / monthly)
-- Prepare a payday, flag new names, amount jumps (>25%), and unresolved handles
-- Send one-by-one with memo `payrun:{period}:@{handle}` — no queued blast
-- Personal history lookup by handle
+- Roster of username + Nimiq wallet, NIM amount, and cadence (weekly / biweekly / monthly)
+- Prepare a payday, flag new names, amount jumps (>25%), and missing wallets
+- Send one-by-one with memo `payrun:{period}:@{username}` — no queued blast
+- Personal history lookup by username
 - Payday log of every past run
-- Claim a handle by signing `payrun:claim:@name`
+- Optional: confirm a username for the connected wallet
 
 ## Stack
 
@@ -62,12 +64,12 @@ Dev server: `http://localhost:3010` (binds `0.0.0.0` for LAN).
 | Route | Purpose |
 |-------|---------|
 | `/` | Intro |
-| `/roster` | Handles, amounts, cadence |
+| `/roster` | Username, wallet, amounts, cadence |
 | `/payday` | Prepare / flag / review |
 | `/payday/send` | One-by-one send |
-| `/history` | Lookup a handle |
+| `/history` | Lookup a username |
 | `/log` | Past payday log |
-| `/claim` | Bind a handle |
+| `/claim` | Optional username confirmation |
 
 ## Production
 
@@ -77,8 +79,10 @@ npx prisma migrate deploy
 npm start
 ```
 
+Live deployment: https://payrun.up.railway.app
+
 Railway (and similar) should provide `PORT` and `DATABASE_URL`. The start command runs `prisma migrate deploy` then `next start`.
 
 ## Honest limits
 
-Payrun does not custody keys, does not batch-sign, and does not invent a shielded pool. Unclaimed handles stay unresolved until the person signs a claim.
+Payrun does not custody keys, does not batch-sign, and does not invent a Nimiq username protocol. Add both a local username and the recipient wallet on the roster.
