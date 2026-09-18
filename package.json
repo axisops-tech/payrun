@@ -3,12 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "dev": "next dev --hostname 0.0.0.0 --port 3010",
+    "build": "prisma generate && next build",
+    "start": "next start --hostname 0.0.0.0 --port ${PORT:-3010}",
+    "db:migrate": "prisma migrate deploy",
+    "db:push": "prisma db push",
+    "lint": "eslint",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@nimiq/mini-app-sdk": "^0.1.0",
+    "@phosphor-icons/react": "^2.1.10",
+    "@prisma/client": "^6.19.3",
     "next": "16.3.5",
     "react": "19.2.8",
     "react-dom": "19.2.8"
@@ -20,7 +26,11 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.5",
+    "prisma": "^6.19.3",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=22"
   }
 }
