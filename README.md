@@ -1,10 +1,16 @@
 # Payrun
 
+[![Payrun](public/social/banner.png)](https://payrun.up.railway.app)
+
+## Live
+
+**Web app:** [https://payrun.up.railway.app](https://payrun.up.railway.app)
+
+Open that URL in a browser, or paste it into Nimiq Pay → Mini Apps.
+
 Pay people by name. Payrun is a Nimiq Pay mini app for team leads who send recurring NIM payroll. Each person on the roster has a name and a Nimiq wallet — Nimiq has no username protocol, so the send always goes to the address on file.
 
 It runs inside the Nimiq Pay mobile WebView. Wallet keys never leave the wallet. Every send is one explicit confirmation in Nimiq Pay.
-
-**Live:** https://payrun.up.railway.app
 
 ## What it does
 
