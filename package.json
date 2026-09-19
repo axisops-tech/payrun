@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --hostname 0.0.0.0 --port 3010",
-    "build": "prisma generate && next build",
-    "start": "next start --hostname 0.0.0.0 --port ${PORT:-3010}",
+    "dev": "node api.js && next dev --hostname 0.0.0.0 --port 3010",
+    "build": "node api.js && prisma generate && next build",
+    "start": "node api.js && next start --hostname 0.0.0.0 --port ${PORT:-3010}",
     "db:migrate": "prisma migrate deploy",
     "db:push": "prisma db push",
     "lint": "eslint",
